@@ -54,3 +54,25 @@ A definição do método a ser executado é definido no cabeçalho da requisiç�
 	* [.../api/bookmarks/{id}]() - enviado via post 
 * **DELETE** - remove 1 bookmark pelo ID
 	* [.../api/bookmarks/{id}]() 
+
+Passos para gerar a estrutura inicial do projeto
+------------------------------------------------
+
+Necessário baixar o [Slim Framework/Install](http://www.slimframework.com/install), feito isso gerado a estrutura de diretórios no */htdocs* do XAMPP
+
+<pre><code>restful-bookmarks-phpslim/
+  api/
+    dao/
+      BookmarkDAO.php
+    Slim/
+      # diretório Slim que foi feito o download
+    .htacess    # para o mapeamento das URLs
+    index.php   # configuração do slim e rotas
+  js/
+    app.js
+    controllers.js
+    services.js
+  tpl/
+    edit.html
+    list.html
+  index.html</code></pre>
