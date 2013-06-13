@@ -1,7 +1,14 @@
 <?php
-class BookmarkDAO {
+class BookmarkDAO 
+{
   
-  private function getDBConn() {
+  private $_select = "SELECT * FROM bookmark ";
+  private $_insert = "INSERT INTO bookmark(name, url, description) VALUES(:name, :url, :description)";
+  private $_update = "UPDATE bookmark SET name = :name, description = :description, url = :url WHERE id = :id";
+  private $_delete = "DELETE FROM bookmark WHERE id = :id";
+  
+  private function getDBConn() 
+  {
     $dbhost="127.0.0.1";
     $dbuser="root";
     $dbpass="";
@@ -11,8 +18,9 @@ class BookmarkDAO {
     return $dbh;
   }
 
-  public function getAll() {
-    $sql = "SELECT * FROM bookmark ORDER BY name";
+  public function getAll() 
+  {
+    $sql = $this->_select . " ORDER BY name";
     
     try {
       $db = $this->getDBConn();
@@ -25,8 +33,9 @@ class BookmarkDAO {
     }
   }
 
-  public function getByName($name) {
-    $sql = "SELECT * FROM bookmark WHERE UPPER(name) LIKE UPPER(:name) ORDER BY name";
+  public function getByName($name) 
+  {
+    $sql = $this->_select . " WHERE UPPER(name) LIKE UPPER(:name) ORDER BY name";
 
     try {
       $db = $this->getDBConn();
@@ -42,8 +51,9 @@ class BookmarkDAO {
     }
   }
 
-  public function getById($id) {
-    $sql = "SELECT * FROM bookmark WHERE id = :id ORDER BY name";
+  public function getById($id) 
+  {
+    $sql = $this->_select . " WHERE id = :id ORDER BY name";
 
     try {
       $db = $this->getDBConn();
@@ -58,12 +68,12 @@ class BookmarkDAO {
     }
   }
 
-  public function insert($vo) {
-    $sql = "INSERT INTO bookmark(name, url, description) VALUES(:name, :url, :description)";
+  public function insert($vo) 
+  {
     
     try {
       $db = $this->getDBConn();
-      $stmt = $db->prepare($sql);  
+      $stmt = $db->prepare($this->_insert);  
       $stmt->bindParam("name", $vo->name);
       $stmt->bindParam("url", $vo->url);
       $stmt->bindParam("description", $vo->description);
@@ -76,12 +86,11 @@ class BookmarkDAO {
     }
   }
 
-  public function update($vo) {
-    $sql = "UPDATE bookmark SET name = :name, description = :description, url = :url WHERE id = :id";
-
+  public function update($vo) 
+  {
     try {
       $db = $this->getDBConn();
-      $stmt = $db->prepare($sql);  
+      $stmt = $db->prepare($this->_update);  
       $stmt->bindParam("name", $vo->name);
       $stmt->bindParam("url", $vo->url);
       $stmt->bindParam("description", $vo->description);
@@ -94,12 +103,11 @@ class BookmarkDAO {
     } 
   }
 
-  public function delete($id) {
-    $sql = "DELETE FROM bookmark WHERE id = :id";
-
+  public function delete($id) 
+  {
     try {
       $db = $this->getDBConn();
-      $stmt = $db->prepare($sql);  
+      $stmt = $db->prepare($this->_delete);  
       $stmt->bindParam("id", $id);
       $stmt->execute();
       $db = null;
@@ -110,4 +118,3 @@ class BookmarkDAO {
   }
 
 }
-?>
