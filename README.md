@@ -3,23 +3,23 @@ RESTful Bookmarks PHP Slim
 
 Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + Twitter Bootstrap e o lado do servidor utilizado o PHP com Slim Framework para disponibilizar um serviço de dados RESTful, via JSON.
 
-Utilizado neste projeto
+This project build with
 -----------------------
 
-* Ambiente de desenvolvimento
+* IDE
   * [Sublime Text](http://www.sublimetext.com/) 2
 
-* Cliente
+* Client
   * [AngularJS](http://angularjs.org/) 1.0.1
   * [Twitter Bootstrap](twitter.github.com/bootstrap) 2.0.4
 
-* Servidor
+* Server
   * [PHP](http://php.net/)
   * [Slim Framework](http://www.slimframework.com/) 
   * [MySQL](http://www.mysql.com/)
   * [XAMPP](http://www.apachefriends.org/pt_br/xampp.html)
 
-Posts que auxiliaram na montagem desse projeto:
+Helpful posts:
 
 * [Vedovelli - Introdução ao AngularJS](http://blog.vedovelli.com.br/?p=1946) utilizado a idéia de como configurar o Slim, do projeto no [github - crud angular](https://github.com/vedovelli/crud-angular/)
 * [RESTful services with jQuery, PHP and the Slim Framework](http://coenraets.org/blog/2011/12/restful-services-with-jquery-php-and-the-slim-framework/)
@@ -76,3 +76,60 @@ Necessário baixar o [Slim Framework/Install](http://www.slimframework.com/insta
     edit.html
     list.html
   index.html</code></pre>
+
+Install Guide
+-------------
+#### Clone
+
+```bash
+$ git clone https://github.com/erkobridee/restful-bookmarks-phpslim.git
+$ cd restful-bookmarks-phpslim/
+$ mysql -u DBUSERNAME -pMYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
+$ mysql -u DBUSERNAME -pMYSQLPASSWORD bookmarks < bookmarks.sql
+```
+
+#### Mysql connections
+edit user ```DBUSERNAME``` and ```MYSQLPASSWORD``` in ```api/dao/BookmarkDAO.php```
+
+
+```php
+...
+  private function getDBConn()
+  {
+    $dbhost="127.0.0.1";
+    $dbuser="DBUSERNAME";
+    $dbpass="MYSQLPASSWORD";
+    $dbname="bookmarks";
+    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $dbh;
+  }
+...
+```
+
+#### Nginx example configuration
+
+
+```nginx
+server {
+        listen 127.0.0.1:80;
+        access_log /var/www/restful-bookmarks-phpslim/log/access.log;
+        error_log /var/www/restful-bookmarks-phpslim/log/error.log warn;
+
+        server_name restful-bookmarks-phpslim;
+        root   /var/www/restful-bookmarks-phpslim/public/;
+
+        index  index.php index.html index.htm;
+        try_files $uri $uri/ /index.php?$request_uri;
+
+	location /api/ {
+            try_files /api/$uri $uri/ /api/index.php?$request_uri;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_split_path_info ^/api/(.+\.php)(/.+)$;
+            fastcgi_intercept_errors on;
+            fastcgi_index  index.php;
+            include fastcgi_params;
+    	}
+}
+
+```
