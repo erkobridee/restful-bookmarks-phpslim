@@ -37,7 +37,7 @@ Sample application to bookmark links, where interface build with Angular.js + Tw
 
 ## Project REST URLs
 
-HTTP VERB
+HTTP Verbs
 
 * **GET** - retrieve 1 or more bookmarks
 

@@ -36,7 +36,7 @@ Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + T
 
 ## RESTful - URLs do projeto
 
-Verbo HTTP
+Verbos HTTP
 
 * **GET** - recupera 1 ou mais bookmarks
 
