@@ -152,3 +152,8 @@ server {
 1. Para o desenvolvimento, vá até o Sublime Text, *File > Open...* e selecione o diretório do projeto
 
 2. Agora é só codificar :)
+
+
+## Licença
+
+MIT : [http://erkobridee.mit-license.org](http://erkobridee.mit-license.org)

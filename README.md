@@ -154,3 +154,7 @@ server {
 
 2. And happy coding :)
 
+
+## License
+
+MIT : [http://erkobridee.mit-license.org](http://erkobridee.mit-license.org)
