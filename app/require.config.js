@@ -15,8 +15,12 @@ require({
 
     //--- @begin app files
 
-    'app/main/controller': {
+    'app/main/menuConfig': {
       deps: ['app/main/module']
+    },
+
+    'app/main/controller': {
+      deps: ['app/main/menuConfig']
     },
 
       //--- @begin: bookmarks
