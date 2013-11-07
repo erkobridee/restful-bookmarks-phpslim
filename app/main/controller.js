@@ -4,10 +4,10 @@ angular.module('app').controller(
   'MainCtrl', 
 
   // dependencies injection
-  ['ProgressConfig', '$scope',
+  ['ProgressConfig', '$scope', '$rootScope', '$location',
 
 // controller definition
-function(progressConfig, $scope) {
+function(progressConfig, $scope, $rootScope, $location) {
 
   //--- @begin: loading progressbar config
   progressConfig.eventListeners();
@@ -16,34 +16,54 @@ function(progressConfig, $scope) {
 
 
   //--- @begin: menu items
-  function menuItem(label, url, css) {
+  function menuItem(label, location, css) {
     return {
       label: label,
-      url: '#'+url,
+      location: '/'+location,
+      url: '#'+location,
       css: (css || '') // 'active'
     };
   }
 
-  var menuItemBookmark = menuItem('Boorkmars', 'bookmarks', 'active');
+  $scope.locationsMap = {
+    '/bookmarks': menuItem('Boorkmars', 'bookmarks'),
+    '/about': menuItem('About', 'about')
+  },
 
-  $scope.menu = {
-    self: this,
+  $scope.menuItems = [
+    $scope.locationsMap['/bookmarks'],
+    $scope.locationsMap['/about']
+  ];
 
-    selected: menuItemBookmark,
-    
-    items: [
-      menuItemBookmark,
-      menuItem('About', 'about')
-    ],
+  $scope.menuItemSelected = null;
 
-    menuItemClick: function(value) {
-      if(value !== $scope.menu.selected) {
-        $scope.menu.selected.css = '';
-        value.css = 'active';
-        $scope.menu.selected = value;
+  $scope.menuItemClick = function(itemClick) {
+    if(itemClick !== $scope.menuItemSelected) {
+        if($scope.menuItemSelected !== null) $scope.menuItemSelected.css = '';
+        itemClick.css = 'active';
+        $scope.menuItemSelected = itemClick;
       }
-    }
   };
+
+
+  $scope.location = $location;
+  $scope.$watch("location.path()", checkLocation, true);
+
+  function checkLocation() {
+    var path, splitArr, location; 
+
+    path = $location.path(); 
+    splitArr = path.split('/');
+    if(splitArr.length > 2) {
+      path = '/'+splitArr[1];
+    }  
+    location = $scope.locationsMap[path];
+    if(location) {
+      $scope.menuItemClick(location);
+    }
+
+  }  
+
   //--- @begin: menu items
 
 }]);
