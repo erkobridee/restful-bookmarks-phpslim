@@ -1,0 +1,31 @@
+<div ng-show="showFilter">
+  <div class="input-group">
+    <span class="input-group-addon">
+      <i class="glyphicon glyphicon-filter"></i>
+    </span>
+    <input type="text" class="form-control" placeholder="Text" ng-model="search">
+  </div>
+
+  <div class="row">&nbsp;</div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name <i class="glyphicon glyphicon-new-window" title="Open in new window"></i></th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="bookmark in bookmarks | filter:search | orderBy:'name'">
+        <td><a href="{{bookmark.url}}" target="_blank">{{bookmark.name}}</a></td>
+        <td>{{bookmark.description}}</td>
+        <td>
+        <a href="#bookmarks/edit/{{bookmark.id}}"><i class="glyphicon glyphicon-pencil"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

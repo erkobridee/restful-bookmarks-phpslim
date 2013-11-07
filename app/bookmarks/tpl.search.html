@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <a href="#bookmarks">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      All Boorkmarks
+    </a>
+    <hr>
+  </div>
+
+  <div class="row">  
+
+    <form role="form" name="searchForm" ng-submit="doSearch()">
+      <div class="input-group" ng-class="{'has-error': searchForm.searchInput.$invalid}">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-search"></i>
+        </span>
+        
+        <input 
+          type="text" class="form-control" 
+          placeholder="Bookmark Name"
+          name="searchInput"
+          ng-model="searchName" required>
+
+        <span class="input-group-btn">
+          <button 
+            class="btn btn-default" 
+            ng-click="doSearch()"
+            ng-disabled="isClean() || searchForm.$invalid"
+            type="button">Search</button>
+        </span>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row" ng-include="'app/bookmarks/tpl.bookmarks-table.html'"></div>
+</div>
