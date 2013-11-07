@@ -20,15 +20,22 @@ function ($scope, resource, $routeParams, $window, $location) {
       $location.path('/');
     });
   };
-    
+  
+  $scope.showConfirm = false;
+  
+  $scope.delete = function() {
+    $scope.showConfirm = true;
+  };
+
+  $scope.cancelDelete = function() {
+    $scope.showConfirm = false;
+  };
+
   $scope.destroy = function() {
-    // TODO: review
-    var confirm = $window.confirm('Delete '+$scope.bookmark.name+ ' bookmark?');
-    if(confirm) {
-      $scope.bookmark.$delete({id: $routeParams.id}, function(res) {
-        $location.path('/');
-      });
-    }
+    $scope.bookmark.$delete({id: $routeParams.id}, function(res) {
+      $scope.showConfirm = false;
+      $location.path('/');
+    });
   };
 
 }]);
