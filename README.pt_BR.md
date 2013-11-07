@@ -12,7 +12,7 @@ Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + T
 
   * [AngularJS](http://angularjs.org/) 1.1.5
 
-  * [Twitter Bootstrap](http://getbootstrap.com/) 3.0.1
+  * [Twitter Bootstrap](http://getbootstrap.com/) 3.x
 
 * Servidor
 
