@@ -45,7 +45,7 @@ class BookmarkDAO
       $stmt->execute();
       $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       $db = null;
-      echo json_encode($result);
+      echo json_encode($result); 
     } catch(PDOException $e) {
       echo '{"error":{"text":'. $e->getMessage() .'}}'; 
     }
