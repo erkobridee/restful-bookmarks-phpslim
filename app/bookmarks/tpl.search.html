@@ -2,37 +2,45 @@
   <div class="row">&nbsp;</div>
 
   <div class="row">
-    <a href="#bookmarks">
-      <i class="glyphicon glyphicon-chevron-left"></i>
-      All Boorkmarks
-    </a>
-    <hr>
-  </div>
+    <div class="col-md-2">
+      
+      <ul class="list-unstyled">
+        <li>
+          
+      <a href="#bookmarks">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        All Boorkmarks
+      </a>
 
-  <div class="row">  
+        </li>
+      </ul>      
 
-    <form role="form" name="searchForm" ng-submit="doSearch()">
-      <div class="input-group" ng-class="{'has-error': searchForm.searchInput.$invalid}">
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-search"></i>
-        </span>
-        
-        <input 
-          type="text" class="form-control" 
-          placeholder="Bookmark Name"
-          name="searchInput"
-          ng-model="searchName" required>
+    </div>
+    <div class="col-md-6 col-md-offset-1">
+      
+      <form role="form" name="searchForm" ng-submit="doSearch()">
+        <div class="input-group" ng-class="{'has-error': searchForm.searchInput.$invalid}">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          
+          <input 
+            type="text" class="form-control" 
+            placeholder="Bookmark Name"
+            name="searchInput"
+            ng-model="searchName" required>
 
-        <span class="input-group-btn">
-          <button 
-            class="btn btn-default" 
-            ng-click="doSearch()"
-            ng-disabled="isClean() || searchForm.$invalid"
-            type="button">Search</button>
-        </span>
-      </div>
-    </form>
+          <span class="input-group-btn">
+            <button 
+              class="btn btn-default" 
+              ng-click="doSearch()"
+              ng-disabled="isClean() || searchForm.$invalid"
+              type="button">Search</button>
+          </span>
+        </div>
+      </form>
 
+    </div>
   </div>
 
   <div class="row">&nbsp;</div>
