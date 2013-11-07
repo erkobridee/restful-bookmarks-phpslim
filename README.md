@@ -11,9 +11,9 @@ Sample application to bookmark links, where interface build with Angular.js + Tw
 
 * Client
 
-  * [AngularJS](http://angularjs.org/) 1.0.1
+  * [AngularJS](http://angularjs.org/) 1.1.5
 
-  * [Twitter Bootstrap](twitter.github.com/bootstrap) 2.0.4
+  * [Twitter Bootstrap](http://getbootstrap.com/) 3.0.1
 
 * Server
 
@@ -41,23 +41,23 @@ HTTP Verbs
 
 * **GET** - retrieve 1 or more bookmarks
 
-  * [.../api/bookmarks/]() - list all bookmarks
+  * [.../rest/bookmarks/]() - list all bookmarks
 
-  * [.../api/bookmarks/{id}]() - retrieve bookmark by ID
+  * [.../rest/bookmarks/{id}]() - retrieve bookmark by ID
 
-  * [.../api/bookmarks/search/{name}]() - retrieve bookmarks list filtering by name
+  * [.../rest/bookmarks/search/{name}]() - retrieve bookmarks list filtering by name
 
 * **POST** - insert new one
 
-  * [.../api/bookmarks/]() - sent inside request body
+  * [.../rest/bookmarks/]() - sent inside request body
 
 * **PUT** - updates an existing
 
-  * [.../api/bookmarks/{id}]() - sent inside request body
+  * [.../rest/bookmarks/{id}]() - sent inside request body
 
 * **DELETE** - remove bookmark by ID
 
-  * [.../api/bookmarks/{id}]() 
+  * [.../rest/bookmarks/{id}]() 
 
 
 ## Project Structure
@@ -66,21 +66,21 @@ HTTP Verbs
 
 ```
 restful-bookmarks-phpslim/
-  api/
+  rest/
     dao/
       BookmarkDAO.php
     Slim/
       # Slim Framework files
     .htacess    # URLs map for Apache (XAMPP)
     index.php   # slim routes config
-  js/
-    app.js
-    controllers.js
-    services.js
-  tpl/
-    edit.html
-    list.html
+  app/
+    # application files
+  shared/
+    # shared files with any future project
+  vendor/
+    # libs
   index.html
+  require.config.js # require.js app config file
 ```
 
 ## Install Guide
@@ -137,10 +137,10 @@ server {
   index  index.php index.html index.htm;
   try_files $uri $uri/ /index.php?$request_uri;
 
-  location /api/ {
-    try_files /api/$uri $uri/ /api/index.php?$request_uri;
+  location /rest/ {
+    try_files /rest/$uri $uri/ /rest/index.php?$request_uri;
     fastcgi_pass 127.0.0.1:9000;
-    fastcgi_split_path_info ^/api/(.+\.php)(/.+)$;
+    fastcgi_split_path_info ^/rest/(.+\.php)(/.+)$;
     fastcgi_intercept_errors on;
     fastcgi_index  index.php;
     include fastcgi_params;

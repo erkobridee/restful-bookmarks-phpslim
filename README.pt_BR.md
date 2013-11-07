@@ -10,9 +10,9 @@ Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + T
 
 * Cliente
 
-  * [AngularJS](http://angularjs.org/) 1.0.1
+  * [AngularJS](http://angularjs.org/) 1.1.5
 
-  * [Twitter Bootstrap](twitter.github.com/bootstrap) 2.0.4
+  * [Twitter Bootstrap](http://getbootstrap.com/) 3.0.1
 
 * Servidor
 
@@ -40,23 +40,23 @@ Verbos HTTP
 
 * **GET** - recupera 1 ou mais bookmarks
 
-  * [.../api/bookmarks/]() - lista todos os bookmarks
+  * [.../rest/bookmarks/]() - lista todos os bookmarks
 
-  * [.../api/bookmarks/{id}]() - retorna o respectivo bookmark pelo seu ID
+  * [.../rest/bookmarks/{id}]() - retorna o respectivo bookmark pelo seu ID
 
-  * [.../api/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome
+  * [.../rest/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome
 
 * **POST** - insere um novo
 
-  * [.../api/bookmarks/]() - enviado dentro do corpo do request
+  * [.../rest/bookmarks/]() - enviado dentro do corpo do request
 
 * **PUT** - atualiza um existente
 
-  * [.../api/bookmarks/{id}]() - enviado dentro do corpo do request
+  * [.../rest/bookmarks/{id}]() - enviado dentro do corpo do request
 
 * **DELETE** - remove 1 bookmark pelo ID
 
-  * [.../api/bookmarks/{id}]() 
+  * [.../rest/bookmarks/{id}]() 
 
 
 ## Estrutura do projeto
@@ -65,21 +65,21 @@ Verbos HTTP
 
 ```
 restful-bookmarks-phpslim/
-  api/
+  rest/
     dao/
       BookmarkDAO.php
     Slim/
       # arquivos do Slim Framework
     .htacess    # mapeamento das URLs para o Apache (XAMPP)
     index.php   # configuração do slim e rotas
-  js/
-    app.js
-    controllers.js
-    services.js
-  tpl/
-    edit.html
-    list.html
+  app/
+    # arquivos/código da aplicação
+  shared/
+    # arquivos/códigos que podem ser reaproveitados em futuros projetos
+  vendor/
+    # libs
   index.html
+  require.config.js # arquivo de configuração da aplicação para require.js
 ```
 
 ## Install Guide
@@ -136,10 +136,10 @@ server {
   index  index.php index.html index.htm;
   try_files $uri $uri/ /index.php?$request_uri;
 
-  location /api/ {
-    try_files /api/$uri $uri/ /api/index.php?$request_uri;
+  location /rest/ {
+    try_files /rest/$uri $uri/ /rest/index.php?$request_uri;
     fastcgi_pass 127.0.0.1:9000;
-    fastcgi_split_path_info ^/api/(.+\.php)(/.+)$;
+    fastcgi_split_path_info ^/rest/(.+\.php)(/.+)$;
     fastcgi_intercept_errors on;
     fastcgi_index  index.php;
     include fastcgi_params;
