@@ -14,9 +14,8 @@ function ($scope, resource) {
   $scope.doSearch = function() {
     resource.query(
       {name: $scope.searchName},
-      function(res) {
-        console.log(res);
-        $scope.bookmarks = res;  
+      function(result) {
+        $scope.bookmarks = result;
       }
     );
   };

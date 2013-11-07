@@ -11,6 +11,8 @@ function ($scope, resource) {
 
   $scope.showFilter = false;
 
-  $scope.bookmarks = resource.query();
+  resource.query(null, function(result) {
+    $scope.bookmarks = result;
+  });
 
 }]);

@@ -4,10 +4,10 @@ angular.module('app').controller(
   'MainCtrl', 
 
   // dependencies injection
-  ['ProgressConfig', '$scope', '$rootScope', '$location',
+  ['ProgressConfig', '$scope', '$location',
 
 // controller definition
-function(progressConfig, $scope, $rootScope, $location) {
+function(progressConfig, $scope, $location) {
 
   //--- @begin: loading progressbar config
   progressConfig.eventListeners();

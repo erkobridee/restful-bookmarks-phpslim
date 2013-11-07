@@ -11,8 +11,8 @@ function ($scope, resource, $routeParams, $window, $location) {
 
   $scope.title = 'Edit Bookmark : ' + $routeParams.id;
 
-  resource.get({id: $routeParams.id}, function(res) {
-    $scope.bookmark = res;
+  resource.get({id: $routeParams.id}, function(result) {
+    $scope.bookmark = result;
   });
 
   $scope.save = function() {
@@ -25,7 +25,6 @@ function ($scope, resource, $routeParams, $window, $location) {
     // TODO: review
     var confirm = $window.confirm('Delete '+$scope.bookmark.name+ ' bookmark?');
     if(confirm) {
-      console.log(self.id);
       $scope.bookmark.$delete({id: $routeParams.id}, function(res) {
         $location.path('/');
       });
