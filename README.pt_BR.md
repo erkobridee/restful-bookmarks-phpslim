@@ -2,6 +2,84 @@
 
 Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + Twitter Bootstrap e o lado do servidor utilizado o PHP com Slim Framework para disponibilizar um serviço de dados RESTful, via JSON.
 
+
+## Guia de instalação
+
+### Clone
+
+```bash
+$ git clone https://github.com/erkobridee/restful-bookmarks-phpslim.git
+$ cd restful-bookmarks-phpslim/
+```
+
+### Crie a base de dados no Mysql
+
+```bash
+$ mysql -u DBUSERNAME -pMYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
+$ mysql -u DBUSERNAME -pMYSQLPASSWORD bookmarks < bookmarks.sql
+```
+
+### Conexão com o Mysql
+
+edite o usuário `DBUSERNAME` e `MYSQLPASSWORD` no arquivo `api/dao/BookmarkDAO.php`
+
+```php
+...
+  private function getDBConn()
+  {
+    $dbhost="127.0.0.1";
+    $dbuser="DBUSERNAME";
+    $dbpass="MYSQLPASSWORD";
+    $dbname="bookmarks";
+    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $dbh;
+  }
+...
+```
+
+### XAMPP
+
+* Copiar a estrutura do projeto para o diretório */htdocs* do XAMPP
+
+
+### Exemplo de configuração do Nginx
+
+```nginx
+server {
+  listen 127.0.0.1:80;
+  access_log /var/www/restful-bookmarks-phpslim/log/access.log;
+  error_log /var/www/restful-bookmarks-phpslim/log/error.log warn;
+
+  server_name restful-bookmarks-phpslim;
+  root   /var/www/restful-bookmarks-phpslim/public/;
+
+  index  index.php index.html index.htm;
+  try_files $uri $uri/ /index.php?$request_uri;
+
+  location /rest/ {
+    try_files /rest/$uri $uri/ /rest/index.php?$request_uri;
+    fastcgi_pass 127.0.0.1:9000;
+    fastcgi_split_path_info ^/rest/(.+\.php)(/.+)$;
+    fastcgi_intercept_errors on;
+    fastcgi_index  index.php;
+    include fastcgi_params;
+  }
+}
+```
+
+## Desenvolvimento com Sublime Text
+
+1. Para o desenvolvimento, vá até o Sublime Text, *File > Open...* e selecione o diretório do projeto
+
+2. Agora é só codificar :)
+
+
+## Licença
+
+MIT : [http://erkobridee.mit-license.org](http://erkobridee.mit-license.org)
+
+
 ## Projeto construído com
 
 * IDE
@@ -81,79 +159,3 @@ restful-bookmarks-phpslim/
   index.html
   require.config.js # arquivo de configuração da aplicação para require.js
 ```
-
-## Install Guide
-
-### Clone
-
-```bash
-$ git clone https://github.com/erkobridee/restful-bookmarks-phpslim.git
-$ cd restful-bookmarks-phpslim/
-```
-
-### Create Mysql Database
-
-```bash
-$ mysql -u DBUSERNAME -pMYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
-$ mysql -u DBUSERNAME -pMYSQLPASSWORD bookmarks < bookmarks.sql
-```
-
-### Mysql connections
-
-edite o usuário `DBUSERNAME` e `MYSQLPASSWORD` no arquivo `api/dao/BookmarkDAO.php`
-
-```php
-...
-  private function getDBConn()
-  {
-    $dbhost="127.0.0.1";
-    $dbuser="DBUSERNAME";
-    $dbpass="MYSQLPASSWORD";
-    $dbname="bookmarks";
-    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $dbh;
-  }
-...
-```
-
-### XAMPP
-
-* Copiar a estrutura do projeto para o diretório */htdocs* do XAMPP
-
-
-### Exemplo de configuração do Nginx
-
-```nginx
-server {
-  listen 127.0.0.1:80;
-  access_log /var/www/restful-bookmarks-phpslim/log/access.log;
-  error_log /var/www/restful-bookmarks-phpslim/log/error.log warn;
-
-  server_name restful-bookmarks-phpslim;
-  root   /var/www/restful-bookmarks-phpslim/public/;
-
-  index  index.php index.html index.htm;
-  try_files $uri $uri/ /index.php?$request_uri;
-
-  location /rest/ {
-    try_files /rest/$uri $uri/ /rest/index.php?$request_uri;
-    fastcgi_pass 127.0.0.1:9000;
-    fastcgi_split_path_info ^/rest/(.+\.php)(/.+)$;
-    fastcgi_intercept_errors on;
-    fastcgi_index  index.php;
-    include fastcgi_params;
-  }
-}
-```
-
-## Desenvolvimento com Sublime Text
-
-1. Para o desenvolvimento, vá até o Sublime Text, *File > Open...* e selecione o diretório do projeto
-
-2. Agora é só codificar :)
-
-
-## Licença
-
-MIT : [http://erkobridee.mit-license.org](http://erkobridee.mit-license.org)
