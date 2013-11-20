@@ -15,8 +15,8 @@ $ cd restful-bookmarks-phpslim/
 ### Create Mysql Database
 
 ```bash
-$ mysql -u DBUSERNAME -pMYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
-$ mysql -u DBUSERNAME -pMYSQLPASSWORD bookmarks < bookmarks.sql
+$ mysql -u DBUSERNAME -p MYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
+$ mysql -u DBUSERNAME -p MYSQLPASSWORD bookmarks < bookmarks.sql
 ```
 
 ### Mysql connections

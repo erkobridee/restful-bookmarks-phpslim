@@ -15,8 +15,8 @@ $ cd restful-bookmarks-phpslim/
 ### Crie a base de dados no Mysql
 
 ```bash
-$ mysql -u DBUSERNAME -pMYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
-$ mysql -u DBUSERNAME -pMYSQLPASSWORD bookmarks < bookmarks.sql
+$ mysql -u DBUSERNAME -p MYSQLPASSWORD -e 'CREATE DATABASE bookmarks;'
+$ mysql -u DBUSERNAME -p MYSQLPASSWORD bookmarks < bookmarks.sql
 ```
 
 ### Conexão com o Mysql
@@ -126,11 +126,11 @@ Verbos HTTP
 
 * **POST** - insere um novo
 
-  * [.../rest/bookmarks/]() - enviado dentro do corpo do request
+  * [.../rest/bookmarks/]() - enviado no corpo da requisição
 
 * **PUT** - atualiza um existente
 
-  * [.../rest/bookmarks/{id}]() - enviado dentro do corpo do request
+  * [.../rest/bookmarks/{id}]() - enviado no corpo da requisição
 
 * **DELETE** - remove 1 bookmark pelo ID
 
