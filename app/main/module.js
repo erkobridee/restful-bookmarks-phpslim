@@ -1,2 +1,13 @@
-//Declaração da aplicação
-angular.module('app', ['loadingBar', 'ngResource']);
+// Module definition
+angular.module(
+  
+  // module name
+  'app', 
+
+  // module dependencies
+  [
+    'loadingBar', 
+    'ngRoute',
+    'ngResource'
+  ]
+);
