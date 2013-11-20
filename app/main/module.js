@@ -6,7 +6,7 @@ angular.module(
 
   // module dependencies
   [
-    'loadingBar', 
+    'fend.comp.progressbar.loading',
     'ngRoute',
     'ngResource'
   ]

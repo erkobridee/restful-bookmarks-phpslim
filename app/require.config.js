@@ -9,7 +9,7 @@ require({
       deps: [
         'angular_route', 
         'angular_resource',
-        'shared/components/loadingBar/module'
+        'shared/components/progressbar/loading/module'
       ]
     },
 

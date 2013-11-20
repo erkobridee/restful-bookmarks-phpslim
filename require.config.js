@@ -61,7 +61,7 @@ require({
   console.log('project require.js config');
 
   require([
-    'shared/components/loadingBar/require.config',
+    'shared/components/progressbar/loading/require.config',
     'app/require.config'
   ]);
 
