@@ -15,12 +15,12 @@ require({
 
     //--- @begin app files
 
-    'app/main/menuConfig': {
+    'app/main/factory.menu.config': {
       deps: ['app/main/module']
     },
 
     'app/main/controller': {
-      deps: ['app/main/menuConfig']
+      deps: ['app/main/factory.menu.config']
     },
 
       //--- @begin: bookmarks
