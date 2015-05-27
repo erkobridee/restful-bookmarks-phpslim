@@ -1,5 +1,11 @@
 # RESTful Bookmarks PHP Slim
 
+>
+> **TODO:**
+> - review and update FrontEnd
+>
+
+
 Sample application to bookmark links, where interface build with Angular.js + Twitter Bootstrap and server powered by PHP with Slim Framework, serving JSON by REST URLs.
 
 
